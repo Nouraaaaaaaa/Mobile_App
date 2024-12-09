@@ -3,4 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="material_pink">#FF1493</color>
+    <color name="blue">#0000FF</color>
+    <color name="lowPink">#F4CCCC</color>
+    <color name="TextcolrPink">#000000</color>
 </resources>

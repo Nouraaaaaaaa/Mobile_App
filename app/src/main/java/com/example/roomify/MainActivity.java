@@ -15,8 +15,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText username,password,Repassword;
-    Button btnSignIn,btnSignUp;
+    EditText username,password,repassword;
+    Button btnSignUp;
     DBhelper dBhelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
 
         username = (EditText)findViewById(R.id.username);
         password = (EditText)findViewById(R.id.password);
-        Repassword = (EditText)findViewById(R.id.Repassword);
+        repassword = (EditText)findViewById(R.id.repassword);
 
-        btnSignIn = (Button) findViewById(R.id.btnSignIn);
+//        btnSignIn = (Button) findViewById(R.id.btnSignIn);
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
         dBhelper = new DBhelper(this);
 
@@ -37,14 +37,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String user = username.getText().toString();
                 String code = password.getText().toString();
-                String recode = Repassword.getText().toString();
+                String recode = repassword.getText().toString();
+
+                System.out.println(user);
+                System.out.println(code);
+                System.out.println(recode);
+
 
                 if(user.equals("") || code.equals("") || recode.equals(""))
                 {
                     Toast.makeText(MainActivity.this, "fill all the field",Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    if(password.equals(recode))
+                    if(code.equals(recode))
                     {
                         boolean validuser = dBhelper.checkuser(user);
                         if(validuser == false)
@@ -53,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                             if(insertuser == true)
                             {
                                 Toast.makeText(MainActivity.this,"registration successful",Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+                                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
                                 startActivity(intent);
                             }
                             else {
@@ -71,13 +76,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
-                startActivity(intent);
-            }
-        });
+//        btnSignIn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
 
     }

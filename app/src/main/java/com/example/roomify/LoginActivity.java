@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -15,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class LoginActivity extends AppCompatActivity {
     EditText username, password ;
+    TextView linkRegister;
     Button btnlogin;
     DBhelper dBhelper;
     @Override
@@ -24,8 +26,10 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         username = (EditText) findViewById(R.id.usernamelogin);
+        linkRegister = (TextView) findViewById(R.id.registerLink);
         password = (EditText) findViewById(R.id.Passwordlogin);
         btnlogin = (Button) findViewById(R.id.btnlogin);
+
 
         dBhelper = new DBhelper(this);
         btnlogin.setOnClickListener(new View.OnClickListener() {
@@ -41,12 +45,21 @@ public class LoginActivity extends AppCompatActivity {
                     boolean res = dBhelper.checkPassword(user,pass);
                     if(res == true )
                     {
-                        Intent intent = new Intent(getApplicationContext(),HomeActiivity.class);
+                        Toast.makeText(LoginActivity.this,"fin dayni",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(),NotesActivity.class);
+                        startActivity(intent);
                     }
                     else {
-                        Toast.makeText(LoginActivity.this,"Password invalid",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this,"User invalid",Toast.LENGTH_SHORT).show();
                     }
                 }
+            }
+        });
+        linkRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(LoginActivity.this,MainActivity.class);
+                startActivity(i);
             }
         });
     }
